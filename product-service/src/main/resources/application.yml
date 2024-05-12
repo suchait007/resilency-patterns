@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: product-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    circuitbreakers:
+      enabled: true
+
+server:
+  port: 8081
+
+rating:
+  service:
+    url: http://localhost:8082
+review:
+  service:
+    url: http://localhost:8083
+
+
+resilience4j.circuitbreaker:
+  instances:
+    backendA:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      failureRateThreshold: 50
+      permittedNumberOfCallsInHalfOpenState: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+
+
+resilience4j.retry:
+  instances:
+    reviewServiceRetry:
+      maxAttempts: 3
+      waitDuration: 2s
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+
+resilience4j.bulkhead:
+  instances:
+    reviewServiceBulkhead:
+      maxConcurrentCalls: 5
+      writableStackTraceEnabled: true
+    ratingServiceThreadPool:
+      maxThreadPoolSize: 5
+      coreThreadPoolSize: 2
+      queueCapacity: 10
+      writableStackTraceEnabled: true
+
+
+
+

@@ -1,0 +1,17 @@
+server:
+  port: 8083
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+resilience4j.ratelimiter:
+    instances:
+      rateLimitingAPI:
+        limitForPeriod: 5
+        limitRefreshPeriod: 1s
+        timeoutDuration: 100ms
+        registerHealthIndicator: true
+        subscribeForEvents: true

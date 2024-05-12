@@ -1,0 +1,2 @@
+2024-02-03 16:01:27.041  INFO 5402 --- [nio-8081-exec-1] c.p.s.service.ProductServiceFaster       : Total time taken : 0.018323084 Seconds.
+2024-02-03 16:04:13.990  INFO 5485 --- [nio-8081-exec-2] c.p.s.service.ProductServiceFaster       : Total time taken : 0.01137175 Seconds.
